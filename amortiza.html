@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Simple</title>
+    <style>
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #000;
+            cursor: pointer;
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #000;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario de Préstamo</h1>
+    <form>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" min="18" value="18" required><br><br>
+        
+        <label for="pais">País:</label>
+        <input type="text" id="pais" list="countries" required><br><br>
+        <datalist id="countries">
+            <option value="México">
+            <option value="Estados Unidos">
+            <option value="España">
+            <option value="Argentina">
+            <option value="Colombia">
+            <option value="Chile">
+            <option value="Perú">
+            <option value="Venezuela">
+            <option value="Ecuador">
+            <option value="Uruguay">
+            <option value="Paraguay">
+            <option value="Bolivia">
+            <option value="Brasil">
+            <option value="Costa Rica">
+            <option value="Panamá">
+            <option value="Guatemala">
+            <option value="Honduras">
+            <option value="El Salvador">
+            <option value="Nicaragua">
+            <option value="Cuba">
+            <option value="República Dominicana">
+            <option value="Puerto Rico">
+        </datalist>
+        
+        <label for="ingresos">Ingresos Mensuales:</label>
+        <input type="number" id="ingresos" step="0.01" required><br><br>
+        
+        <label for="score">Score: <span id="scoreValue">700</span></label>
+        <input type="range" id="score" min="400" max="1000" value="700" required><br><br>
+        
+        <p>Buró de Crédito: <span id="buro">Regular</span></p><br>
+        
+        <label for="montoPrestamo">Monto de Préstamo:</label>
+        <input type="number" id="montoPrestamo" step="0.01" required><br><br>
+        
+        <label for="tasaReferencia">Tasa de Referencia:</label>
+        <input type="number" id="tasaReferencia" step="0.01" required><br><br>
+        
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" step="0.01" required><br><br>
+        
+        <label for="tasaInteres">Tasa de Interés Anual:</label>
+        <input type="number" id="tasaInteres" step="0.01" required><br><br>
+    </form>
+    <script>
+        const scoreInput = document.getElementById('score');
+        const scoreValue = document.getElementById('scoreValue');
+        const buroSpan = document.getElementById('buro');
+
+        function updateBuro() {
+            const score = parseInt(scoreInput.value);
+            scoreValue.textContent = score;
+            let buro, color;
+            if (score < 600) {
+                buro = 'Malo';
+                color = 'red';
+            } else if (score < 800) {
+                buro = 'Regular';
+                color = 'yellow';
+            } else {
+                buro = 'Bueno';
+                color = 'green';
+            }
+            buroSpan.textContent = buro;
+            scoreInput.style.background = color;
+        }
+
+        scoreInput.addEventListener('input', updateBuro);
+        updateBuro(); // Initial call
+    </script>
+</body>
+</html>
